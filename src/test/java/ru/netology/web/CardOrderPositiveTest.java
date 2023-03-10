@@ -42,20 +42,44 @@ public class CardOrderPositiveTest {
         driver.findElement(By.name("phone")).sendKeys("+79231734037");
         driver.findElement(By.className("checkbox__text")).click();
         driver.findElement(By.className("button__text")).click();
-        String expected = "  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        String actual = driver.findElement(By.tagName("p")).getText();
+        String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
+        String actual = driver.findElement(By.tagName("p")).getText().trim();
         assertEquals(expected, actual);
     }
 
     @Test
-    void shouldSendApplicationIfNameWithDashAndPutDownCheckbox(){
+    void shouldSendApplicationIfNameWithDash(){
         driver.get("http://localhost:9999");
         driver.findElements(By.tagName("input")).get(0).sendKeys("Дроздова Анна-Мария");
         driver.findElement(By.name("phone")).sendKeys("+79231734037");
         driver.findElement(By.className("checkbox__text")).click();
         driver.findElement(By.className("button__text")).click();
-        String expected = "  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        String actual = driver.findElement(By.tagName("p")).getText();
+        String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
+        String actual = driver.findElement(By.tagName("p")).getText().trim();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldSendApplicationIfNameWithLetterЁ(){
+        driver.get("http://localhost:9999");
+        driver.findElements(By.tagName("input")).get(0).sendKeys("Ёлкин Александр");
+        driver.findElement(By.name("phone")).sendKeys("+79231734037");
+        driver.findElement(By.className("checkbox__text")).click();
+        driver.findElement(By.className("button__text")).click();
+        String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
+        String actual = driver.findElement(By.tagName("p")).getText().trim();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldSendApplicationIfNameWithSeveralParts(){
+        driver.get("http://localhost:9999");
+        driver.findElements(By.tagName("input")).get(0).sendKeys("Абу Али ибн Сина");
+        driver.findElement(By.name("phone")).sendKeys("+79231734037");
+        driver.findElement(By.className("checkbox__text")).click();
+        driver.findElement(By.className("button__text")).click();
+        String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
+        String actual = driver.findElement(By.tagName("p")).getText().trim();
         assertEquals(expected, actual);
     }
 }
