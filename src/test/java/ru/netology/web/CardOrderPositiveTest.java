@@ -38,48 +38,50 @@ public class CardOrderPositiveTest {
     @Test
     void shouldSendApplicationIfCorrectDataAndPutDownCheckbox() {
         driver.get("http://localhost:9999");
-        driver.findElements(By.tagName("input")).get(0).sendKeys("Дроздов Петя");
-        driver.findElement(By.name("phone")).sendKeys("+79231734037");
-        driver.findElement(By.className("checkbox__text")).click();
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Дроздов Петя");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79231734037");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.className("button__text")).click();
         String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        String actual = driver.findElement(By.tagName("p")).getText().trim();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
         assertEquals(expected, actual);
     }
 
     @Test
     void shouldSendApplicationIfNameWithDash(){
         driver.get("http://localhost:9999");
-        driver.findElements(By.tagName("input")).get(0).sendKeys("Дроздова Анна-Мария");
-        driver.findElement(By.name("phone")).sendKeys("+79231734037");
-        driver.findElement(By.className("checkbox__text")).click();
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).
+                sendKeys("Дроздова Анна-Мария");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79231734037");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.className("button__text")).click();
         String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        String actual = driver.findElement(By.tagName("p")).getText().trim();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
         assertEquals(expected, actual);
     }
 
     @Test
     void shouldSendApplicationIfNameWithLetterЁ(){
         driver.get("http://localhost:9999");
-        driver.findElements(By.tagName("input")).get(0).sendKeys("Ёлкин Александр");
-        driver.findElement(By.name("phone")).sendKeys("+79231734037");
-        driver.findElement(By.className("checkbox__text")).click();
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Ёлкин Александр");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79231734037");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.className("button__text")).click();
         String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        String actual = driver.findElement(By.tagName("p")).getText().trim();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
         assertEquals(expected, actual);
     }
 
     @Test
     void shouldSendApplicationIfNameWithSeveralParts(){
         driver.get("http://localhost:9999");
-        driver.findElements(By.tagName("input")).get(0).sendKeys("Абу Али ибн Сина");
-        driver.findElement(By.name("phone")).sendKeys("+79231734037");
-        driver.findElement(By.className("checkbox__text")).click();
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).
+                sendKeys("Абу Али ибн Сина");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79231734037");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.className("button__text")).click();
         String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        String actual = driver.findElement(By.tagName("p")).getText().trim();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
         assertEquals(expected, actual);
     }
 }
